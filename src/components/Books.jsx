@@ -2,6 +2,9 @@
 import {books} from "../constants/mockData"
 import React, { useState } from 'react'
 import BookCard from "./BookCard"
+import SideCard from "./SideCard";
+
+import styles from "./Books.module.css"
 
 function Books() {
     const [liked , setLiked] =useState([]) ;
@@ -18,9 +21,12 @@ function Books() {
         } 
     }
     return (
-        <div>
-            <div>{books.map((book) => (<BookCard  key={book.id} data={book} handleLikedList={handleLikedList}/>))}</div>
-            {!!liked.length && <div>ss</div>}
+        <div  className={styles.container}>
+            <div className={styles.cards}>
+                {books.map((book) => (<BookCard  key={book.id} data={book} handleLikedList={handleLikedList}/>))}</div>
+            {!!liked.length && <div className={styles.favorite}>
+                <h4>Favorites</h4>
+                {liked.map (book => <SideCard  key={book.id} data={book}/>)}</div>}
         </div>
     )
 }
